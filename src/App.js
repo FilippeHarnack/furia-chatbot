@@ -1,0 +1,137 @@
+// PanteraBot - Layout Dark Modernizado com Cores Vibrantes
+import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const mockResponses = {
+  "ola": "Fala, torcedor da FURIA! Preparado pra ver bala hoje? 🐱‍👤",
+  "ultimos jogos": "Nos últimos jogos, a FURIA enfrentou NAVI, G2 e Liquid. 2 vitórias e 1 derrota! 🔥",
+  "jogadores": null,
+  "proximos jogos": "Nosso próximo jogo é contra a FaZe, dia 25/04 às 18h! 🕕",
+  "memes": "FAZ O L! 😂🐾",
+  "merch": "Confere a loja oficial da FURIA aqui: https://shop.furia.gg 👕🧢"
+};
+
+const playerData = [
+  { name: "KSCERATO", fullName: "Gabriel 'KSCERATO' Veronese", role: "Entry Fragger", kd: "1.20", rating: "1.18", img: "https://via.placeholder.com/150?text=KSCERATO" },
+  { name: "yuurih", fullName: "Yuri 'yuurih' Santos", role: "AWPer", kd: "1.14", rating: "1.12", img: "https://via.placeholder.com/150?text=yuurih" },
+  { name: "arT", fullName: "Andrei 'arT' Piovezan", role: "Support", kd: "0.95", rating: "0.98", img: "https://via.placeholder.com/150?text=arT" },
+  { name: "chelo", fullName: "Henrique 'chelo' Bastos", role: "Rifler", kd: "1.05", rating: "1.02", img: "https://via.placeholder.com/150?text=chelo" },
+  { name: "FalleN", fullName: "Gabriel 'FalleN' Toledo", role: "In-Game Leader", kd: "1.08", rating: "1.10", img: "https://via.placeholder.com/150?text=FalleN" }
+];
+
+// Estilos modernos
+const userBubbleStyle = {
+  background: 'linear-gradient(135deg, #8E2DE2, #4A00E0)',
+  color: '#ffffff',
+  borderRadius: '20px',
+  padding: '0.75rem 1rem',
+  maxWidth: '80%',
+};
+
+const botBubbleStyle = {
+  background: 'rgba(255, 255, 255, 0.1)',
+  color: '#f1f1f1',
+  borderRadius: '20px',
+  padding: '0.75rem 1rem',
+  maxWidth: '80%',
+};
+
+const inputStyle = {
+  background: 'rgba(255, 255, 255, 0.1)',
+  color: '#ffffff',
+  border: 'none',
+};
+
+const gradientTextStyle = {
+  background: 'linear-gradient(135deg, #FF3CAC, #784BA0, #2B86C5)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+};
+
+function PlayerCards() {
+  return (
+    <div className="mt-4">
+      <h4 className="text-white mb-3">Jogadores da FURIA CS:GO</h4>
+      <div className="row g-3">
+        {playerData.map((p, idx) => (
+          <div className="col-12 col-sm-6" key={idx}>
+            <div className="card bg-dark text-white h-100 shadow-lg" style={{ border: '1px solid #333' }}>
+              <img src={p.img} className="card-img-top" alt={p.name} />
+              <div className="card-body">
+                <h5 className="card-title" style={gradientTextStyle}>{p.name}</h5>
+                <p className="card-text text-muted small">{p.fullName}</p>
+                <ul className="list-unstyled">
+                  <li><strong>Função:</strong> {p.role}</li>
+                  <li><strong>KD:</strong> {p.kd}</li>
+                  <li><strong>Rating:</strong> {p.rating}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  const [messages, setMessages] = useState([
+    { sender: "bot", text: "E aí! Eu sou o PanteraBot. Pergunta aí o que quiser saber sobre a FURIA! 🐱‍🏍" }
+  ]);
+  const [input, setInput] = useState("");
+  const [showPlayers, setShowPlayers] = useState(false);
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+    const userText = input.toLowerCase();
+    const userMessage = { sender: "user", text: input };
+
+    if (userText === "jogadores") {
+      setShowPlayers(true);
+      setMessages([...messages, userMessage, { sender: "bot", text: "Confira abaixo os jogadores atuais da equipe!" }]);
+    } else {
+      setShowPlayers(false);
+      const reply = mockResponses[userText] || "Não entendi 🤔 Tenta perguntar de outro jeito.";
+      setMessages([...messages, userMessage, { sender: "bot", text: reply }]);
+    }
+    setInput("");
+  };
+
+  return (
+    <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center" style={{
+      backgroundImage: "url('https://img.icons8.com/ios-filled/200/000000/panther.png')",
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundSize: 'contain'
+    }}>
+      <div className="card bg-dark bg-opacity-80 border-0 p-4 shadow-lg" style={{ width: '100%', maxWidth: '600px' }}>
+        <div className="text-center mb-4">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/FURIA_Esports_logo.svg" alt="FURIA Logo" height="60" className="me-2" />
+          <span className="h2 fw-bold" style={gradientTextStyle}>PanteraBot 🐾</span>
+        </div>
+        <div className="mb-3" style={{ height: '300px', overflowY: 'auto' }}>
+          {messages.map((msg, i) => (
+            <div key={i} className={`d-flex mb-2 ${msg.sender === "user" ? "justify-content-end" : "justify-content-start"}`}>
+              <div style={msg.sender === "user" ? userBubbleStyle : botBubbleStyle}>
+                {msg.text}
+              </div>
+            </div>
+          ))}
+          {showPlayers && <PlayerCards />}
+        </div>
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Manda tua pergunta aí..."
+            style={inputStyle}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSend()}
+          />
+          <button className="btn btn-primary" onClick={handleSend}>Enviar</button>
+        </div>
+      </div>
+    </div>
+  );
+}
