@@ -100,7 +100,7 @@ npm start
 
 ---
 
-## 🔗 Link do par o vídeo do projeto
+## 🔗 Link do para o vídeo do projeto
 
 ▶️ Assista ao PanteraBot em ação no YouTube:
 https://youtu.be/sakLXBdFdZ4
