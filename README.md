@@ -16,6 +16,41 @@ Esse chatbot apresenta:
 Tudo isso em um layout escuro, estilizado com Bootstrap e ícones personalizados.
 
 ---
+## 💬 Comandos Disponíveis no Chatbot
+
+O PanteraBot é um bot interativo com informações sobre a equipe FURIA e o universo do CS:GO. Use os comandos abaixo para interagir:
+
+- **"ola"**  
+  _Saudação inicial._  
+  Resposta: "Fala, torcedor da FURIA! Preparado pra ver bala hoje? 🐱‍👤"
+
+- **"ultimos jogos"**  
+  _Informações sobre os últimos jogos da FURIA._  
+  Resposta: "Nos últimos jogos, a FURIA enfrentou NAVI, G2 e Liquid. 2 vitórias e 1 derrota! 🔥"
+
+- **"jogadores"**  
+  _Mostra os cards dos jogadores atuais da equipe, com nomes, funções e estatísticas._
+
+- **"proximos jogos"**  
+  _Exibe a agenda dos próximos jogos, com data, adversário e torneio._
+
+- **"memes"**  
+  _Resposta divertida e descontraída._  
+  Resposta: "FAZ O L! 😂🐾"
+
+- **"merch"**  
+  _Link para a loja oficial da FURIA._  
+  Resposta: "Confere a loja oficial da FURIA aqui: https://shop.furia.gg 👕🧢"
+
+  - **Comando não reconhecido**  
+  Resposta padrão: "Não entendi 🤔 Tenta perguntar de outro jeito."
+
+### Como usar
+
+Digite o comando no campo de entrada do chatbot e pressione Enter ou clique em "Enviar" para receber a resposta.
+
+---
+
 
 ## 🚀 Como rodar localmente
 
