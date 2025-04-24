@@ -1,5 +1,5 @@
 // PanteraBot - Layout Dark Modernizado com Agenda de Jogos
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const mockResponses = {
@@ -108,6 +108,12 @@ export default function App() {
   const [showPlayers, setShowPlayers] = useState(false);
   const [showSchedule, setShowSchedule] = useState(false);
 
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const handleSend = () => {
     if (!input.trim()) return;
     const userText = input.toLowerCase();
@@ -132,53 +138,53 @@ export default function App() {
 
   return (
     <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center p-3">
-  <div className="card bg-dark bg-opacity-75 border-0 p-4 shadow-lg w-100" style={{ maxWidth: '600px' }}>
-    
-    {/* Header centralizado com logos e nome */}
-    <div className="text-center mb-4">
-      <div className="d-flex justify-content-center align-items-center gap-3 flex-wrap">
-        <img
-          src="/pantera.png"
-          alt="Pantera Mascote Cowboy"
-          height="60"
-          style={{ borderRadius: '50%', boxShadow: '0 0 12px #8E2DE2' }}
-        />
-        <span className="h2 fw-bold mb-0" style={gradientTextStyle}>PanteraBot 🐾</span>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/9/94/FURIA_Esports_logo.svg"
-          alt="FURIA Logo"
-          height="60"
-        />
-      </div>
-    </div>
+      <div className="card bg-dark bg-opacity-75 border-0 p-4 shadow-lg w-100" style={{ maxWidth: '600px' }}>
 
-    <div className="mb-3 overflow-auto" style={{ maxHeight: '300px' }}>
-      {messages.map((msg, i) => (
-        <div key={i} className={`d-flex mb-2 ${msg.sender === "user" ? "justify-content-end" : "justify-content-start"}`}>
-          <div style={msg.sender === "user" ? userBubbleStyle : botBubbleStyle}>
-            {msg.text}
+        {/* Header centralizado com logos e nome */}
+        <div className="text-center mb-4">
+          <div className="d-flex justify-content-center align-items-center gap-3 flex-wrap">
+            <img
+              src="/pantera.png"
+              alt="Pantera Mascote Cowboy"
+              height="60"
+              style={{ borderRadius: '50%', boxShadow: '0 0 12px #8E2DE2' }}
+            />
+            <span className="h2 fw-bold mb-0" style={gradientTextStyle}>PanteraBot 🐾</span>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/94/FURIA_Esports_logo.svg"
+              alt="FURIA Logo"
+              height="60"
+            />
           </div>
         </div>
-      ))}
-      {showPlayers && <PlayerCards />}
-      {showSchedule && <Schedule />}
-    </div>
 
-    {/* Input */}
-    <div className="input-group">
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Manda tua pergunta aí..."
-        style={inputStyle}
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && handleSend()}
-      />
-     <button className="btn btn-primary" onClick={handleSend}>Enviar</button>
-     </div>
-  </div>
-</div>
+        <div className="mb-3 overflow-auto" style={{ maxHeight: '300px' }}>
+          {messages.map((msg, i) => (
+            <div key={i} className={`d-flex mb-2 ${msg.sender === "user" ? "justify-content-end" : "justify-content-start"}`}>
+              <div style={msg.sender === "user" ? userBubbleStyle : botBubbleStyle}>
+                {msg.text}
+              </div>
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
+          {showPlayers && <PlayerCards />}
+          {showSchedule && <Schedule />}
+        </div>
+
+                {/* Input */}
+                <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Manda tua pergunta aí..."
+            style={inputStyle}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSend()}
+          />
+          <button className="btn btn-primary" onClick={handleSend}>Enviar</button>
+        </div>
+      </div>
+    </div>
   );
 }
-
