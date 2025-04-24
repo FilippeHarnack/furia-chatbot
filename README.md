@@ -100,9 +100,10 @@ npm start
 
 ---
 
-## 🔗 Link do projeto online
+## 🔗 Link do par o vídeo do projeto
 
-[🔗 Deploy via Vercel/Netlify (se disponível)](https://link-do-seu-site.com)
+▶️ Assista ao PanteraBot em ação no YouTube:
+https://youtu.be/sakLXBdFdZ4
 
 ---
 
