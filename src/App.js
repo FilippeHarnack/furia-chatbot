@@ -1,4 +1,4 @@
-// PanteraBot - Layout Dark Modernizado com Cores Vibrantes
+// PanteraBot - Layout Dark Modernizado com Agenda de Jogos
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -6,7 +6,7 @@ const mockResponses = {
   "ola": "Fala, torcedor da FURIA! Preparado pra ver bala hoje? 🐱‍👤",
   "ultimos jogos": "Nos últimos jogos, a FURIA enfrentou NAVI, G2 e Liquid. 2 vitórias e 1 derrota! 🔥",
   "jogadores": null,
-  "proximos jogos": "Nosso próximo jogo é contra a FaZe, dia 25/04 às 18h! 🕕",
+  "proximos jogos": null,
   "memes": "FAZ O L! 😂🐾",
   "merch": "Confere a loja oficial da FURIA aqui: https://shop.furia.gg 👕🧢"
 };
@@ -19,7 +19,12 @@ const playerData = [
   { name: "FalleN", fullName: "Gabriel 'FalleN' Toledo", role: "In-Game Leader", kd: "1.08", rating: "1.10", img: "https://via.placeholder.com/150?text=FalleN" }
 ];
 
-// Estilos modernos
+const upcomingGames = [
+  { team: "FaZe Clan", date: "25/04/2025", time: "18:00", tournament: "IEM Dallas 2025" },
+  { team: "NAVI", date: "27/04/2025", time: "15:30", tournament: "IEM Dallas 2025" },
+  { team: "Vitality", date: "29/04/2025", time: "20:00", tournament: "IEM Dallas 2025" }
+];
+
 const userBubbleStyle = {
   background: 'linear-gradient(135deg, #8E2DE2, #4A00E0)',
   color: '#ffffff',
@@ -74,12 +79,34 @@ function PlayerCards() {
   );
 }
 
+function Schedule() {
+  return (
+    <div className="mt-4">
+      <h4 className="text-white mb-3">Agenda de Jogos</h4>
+      {upcomingGames.map((game, idx) => (
+        <div key={idx} className="card bg-dark text-white mb-3 shadow-sm" style={{ border: '1px solid #444' }}>
+          <div className="card-body">
+            <h5 className="card-title">FURIA vs {game.team}</h5>
+            <p className="card-text">
+              <strong>Data:</strong> {game.date}<br />
+              <strong>Hora:</strong> {game.time}<br />
+              <strong>Torneio:</strong> {game.tournament}
+            </p>
+            <button className="btn btn-outline-light btn-sm">Ver mais</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function App() {
   const [messages, setMessages] = useState([
     { sender: "bot", text: "E aí! Eu sou o PanteraBot. Pergunta aí o que quiser saber sobre a FURIA! 🐱‍🏍" }
   ]);
   const [input, setInput] = useState("");
   const [showPlayers, setShowPlayers] = useState(false);
+  const [showSchedule, setShowSchedule] = useState(false);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -88,9 +115,15 @@ export default function App() {
 
     if (userText === "jogadores") {
       setShowPlayers(true);
+      setShowSchedule(false);
       setMessages([...messages, userMessage, { sender: "bot", text: "Confira abaixo os jogadores atuais da equipe!" }]);
+    } else if (userText === "proximos jogos") {
+      setShowSchedule(true);
+      setShowPlayers(false);
+      setMessages([...messages, userMessage, { sender: "bot", text: "Segue a agenda dos próximos jogos! 🗓️" }]);
     } else {
       setShowPlayers(false);
+      setShowSchedule(false);
       const reply = mockResponses[userText] || "Não entendi 🤔 Tenta perguntar de outro jeito.";
       setMessages([...messages, userMessage, { sender: "bot", text: reply }]);
     }
@@ -118,6 +151,7 @@ export default function App() {
             </div>
           ))}
           {showPlayers && <PlayerCards />}
+          {showSchedule && <Schedule />}
         </div>
         <div className="input-group">
           <input
