@@ -61,7 +61,7 @@ npm start
 |----------------|-----------------|
 | ![tela1](./prints/home.png) | ![tela2](./prints/jogadores.png) |
 
-> (Você pode substituir os prints pelos reais depois que tirar screenshots!)
+
 
 ---
 
