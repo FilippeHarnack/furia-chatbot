@@ -59,7 +59,7 @@ npm start
 
 | Tela principal | Card de jogador |
 |----------------|-----------------|
-| ![tela1](./prints/home.png) | ![tela2](./prints/jogador.png) |
+| ![tela1](./prints/home.png) | ![tela2](./prints/jogadores.png) |
 
 > (Você pode substituir os prints pelos reais depois que tirar screenshots!)
 
