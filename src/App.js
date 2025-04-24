@@ -131,41 +131,54 @@ export default function App() {
   };
 
   return (
-    <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center" style={{
-      backgroundImage: "url('https://img.icons8.com/ios-filled/200/000000/panther.png')",
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      backgroundSize: 'contain'
-    }}>
-      <div className="card bg-dark bg-opacity-80 border-0 p-4 shadow-lg" style={{ width: '100%', maxWidth: '600px' }}>
-        <div className="text-center mb-4">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/FURIA_Esports_logo.svg" alt="FURIA Logo" height="60" className="me-2" />
-          <span className="h2 fw-bold" style={gradientTextStyle}>PanteraBot 🐾</span>
-        </div>
-        <div className="mb-3" style={{ height: '300px', overflowY: 'auto' }}>
-          {messages.map((msg, i) => (
-            <div key={i} className={`d-flex mb-2 ${msg.sender === "user" ? "justify-content-end" : "justify-content-start"}`}>
-              <div style={msg.sender === "user" ? userBubbleStyle : botBubbleStyle}>
-                {msg.text}
-              </div>
-            </div>
-          ))}
-          {showPlayers && <PlayerCards />}
-          {showSchedule && <Schedule />}
-        </div>
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Manda tua pergunta aí..."
-            style={inputStyle}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSend()}
-          />
-          <button className="btn btn-primary" onClick={handleSend}>Enviar</button>
-        </div>
+    <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center p-3">
+  <div className="card bg-dark bg-opacity-75 border-0 p-4 shadow-lg w-100" style={{ maxWidth: '600px' }}>
+    
+    {/* Header centralizado com logos e nome */}
+    <div className="text-center mb-4">
+      <div className="d-flex justify-content-center align-items-center gap-3 flex-wrap">
+        <img
+          src="/pantera.png"
+          alt="Pantera Mascote Cowboy"
+          height="60"
+          style={{ borderRadius: '50%', boxShadow: '0 0 12px #8E2DE2' }}
+        />
+        <span className="h2 fw-bold mb-0" style={gradientTextStyle}>PanteraBot 🐾</span>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/9/94/FURIA_Esports_logo.svg"
+          alt="FURIA Logo"
+          height="60"
+        />
       </div>
     </div>
+
+    <div className="mb-3 overflow-auto" style={{ maxHeight: '300px' }}>
+      {messages.map((msg, i) => (
+        <div key={i} className={`d-flex mb-2 ${msg.sender === "user" ? "justify-content-end" : "justify-content-start"}`}>
+          <div style={msg.sender === "user" ? userBubbleStyle : botBubbleStyle}>
+            {msg.text}
+          </div>
+        </div>
+      ))}
+      {showPlayers && <PlayerCards />}
+      {showSchedule && <Schedule />}
+    </div>
+
+    {/* Input */}
+    <div className="input-group">
+      <input
+        type="text"
+        className="form-control"
+        placeholder="Manda tua pergunta aí..."
+        style={inputStyle}
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && handleSend()}
+      />
+     <button className="btn btn-primary" onClick={handleSend}>Enviar</button>
+     </div>
+  </div>
+</div>
   );
 }
+

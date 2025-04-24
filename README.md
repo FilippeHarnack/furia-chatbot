@@ -73,6 +73,6 @@ npm start
 
 ## 👨‍💻 Autor
 
-Feito com 💜 por [Filippe Harnack](https://github.com/FilippeHarnack) 🚀
+Feito  por [Filippe Harnack](https://github.com/FilippeHarnack) 🚀
 
 
