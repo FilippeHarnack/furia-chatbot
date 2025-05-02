@@ -150,11 +150,6 @@ export default function App() {
               style={{ borderRadius: '50%', boxShadow: '0 0 12px #8E2DE2' }}
             />
             <span className="h2 fw-bold mb-0" style={gradientTextStyle}>PanteraBot 🐾</span>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/94/FURIA_Esports_logo.svg"
-              alt="FURIA Logo"
-              height="60"
-            />
           </div>
         </div>
 
